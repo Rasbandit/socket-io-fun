@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Socket IO SUPER Fun</title>
+</head>
+
+<body>
+    <h1> sockety socket app</h1>
+    <input type='text' id="input"></input>
+
+    <button id="button">click me</button>
+
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io.connect('http://localhost:3005');
+        socket.on('news', function (data) {
+            console.log(data);
+            socket.emit('my other event', { my: 'data' })
+        })
+
+        document.getElementById("button").onclick = function () {
+            let userInput = document.getElementById("input").value;
+            socket.emit('from client', { text: userInput })
+        }
+    </script>
+
+</body>
+
+</html>
